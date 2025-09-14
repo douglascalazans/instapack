@@ -4,9 +4,10 @@
 /* --- VARIÁVEIS DE CORES E EFEITOS (ROOT) --- */
 :root {
     --neon-pink: #ff00a0;
+    --neon-purple: #9d00ff; /* Cor Roxo Neon para o carrossel */
     --black: #0d0d0d;
     --white: #ffffff;
-    --glow-shadow: 0 0 5px var(--neon-pink), 0 0 15px var(--neon-pink), 0 0 25px var(--neon-pink);
+    --glow-shadow-pink: 0 0 5px var(--neon-pink), 0 0 15px var(--neon-pink), 0 0 25px var(--neon-pink);
 }
 
 /* --- RESET E CONFIGURAÇÕES GERAIS --- */
@@ -32,7 +33,7 @@ body {
 .container {
     max-width: 1100px;
     margin: 0 auto;
-    padding: 60px 20px; /* Aumentei o espaçamento vertical para melhor separação */
+    padding: 40px 20px;
     text-align: center;
 }
 
@@ -40,7 +41,7 @@ h1, h2, h3 {
     font-family: 'Poppins', sans-serif;
     font-weight: 800;
     line-height: 1.2;
-    text-shadow: 0 0 4px rgba(255, 0, 160, 0.8); /* Sombra de texto mais sutil */
+    text-shadow: 0 0 3px var(--neon-pink);
 }
 
 h1 {
@@ -50,7 +51,7 @@ h1 {
 
 h2 {
     font-size: 2.2rem;
-    margin-bottom: 2.5rem; /* Aumentei a margem para mais respiro */
+    margin-bottom: 2rem;
     color: var(--neon-pink);
 }
 
@@ -69,12 +70,11 @@ p {
     font-size: 1.2rem;
     font-weight: 700;
     text-decoration: none;
-    text-transform: uppercase; /* Deixa o texto em maiúsculas */
     padding: 15px 40px;
     border-radius: 50px;
     border: 2px solid var(--neon-pink);
-    box-shadow: var(--glow-shadow);
-    transition: all 0.3s ease-in-out;
+    box-shadow: var(--glow-shadow-pink);
+    transition: all 0.3s ease;
     animation: pulse 2s infinite;
 }
 
@@ -86,9 +86,9 @@ p {
 }
 
 @keyframes pulse {
-    0% { transform: scale(1); box-shadow: var(--glow-shadow); }
-    50% { transform: scale(1.03); box-shadow: 0 0 8px var(--neon-pink), 0 0 20px var(--neon-pink), 0 0 35px var(--neon-pink); }
-    100% { transform: scale(1); box-shadow: var(--glow-shadow); }
+    0% { transform: scale(1); }
+    50% { transform: scale(1.03); }
+    100% { transform: scale(1); }
 }
 
 /* --- SEÇÃO: HERO --- */
@@ -98,13 +98,10 @@ p {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding-top: 80px; /* Espaço para cabeçalho fixo, se houver */
-    padding-bottom: 80px;
 }
 
 .hero p {
     font-size: 1.3rem;
-    opacity: 0.9;
 }
 
 .support-elements {
@@ -123,11 +120,12 @@ p {
     border-left: 3px solid var(--neon-pink);
 }
 
-/* --- SEÇÃO: PROVA SOCIAL E GALERIA --- */
+/* --- SEÇÃO: PROVA SOCIAL --- */
 .social-proof {
     background: rgba(0,0,0,0.3);
     border-top: 1px solid rgba(255, 0, 160, 0.2);
     border-bottom: 1px solid rgba(255, 0, 160, 0.2);
+    padding-bottom: 60px; /* Mais espaço para o carrossel */
 }
 
 .proof-items {
@@ -140,26 +138,49 @@ p {
     flex-wrap: wrap;
 }
 
-.gallery {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-    gap: 20px;
-}
-
-.gallery img {
+/* --- ESTILOS DO CARROSSEL DE IMAGENS --- */
+.carousel-container {
     width: 100%;
-    height: auto;
+    max-width: 90vw;
+    margin: 0 auto;
+    overflow: hidden;
+    position: relative;
+    /* Efeito de fade nas laterais para suavizar o loop */
+    -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+}
+
+.carousel-track {
+    display: flex;
+    /* Cálculo da largura total: (Largura da Imagem + Margem Horizontal Total) * (Número de Imagens * 2 para o loop) */
+    width: calc((160px + 20px) * 12); 
+    animation: scroll 30s linear infinite;
+}
+
+@keyframes scroll {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        /* Move a faixa para a esquerda pelo tamanho exato do primeiro conjunto de imagens */
+        transform: translateX(calc((160px + 20px) * -6));
+    }
+}
+
+.carousel-track:hover {
+     animation-play-state: paused; /* Pausa a animação ao passar o mouse */
+}
+
+.carousel-track img {
+    width: 160px;
+    height: 160px;
+    object-fit: cover;
+    margin: 0 10px;
     border-radius: 10px;
-    border: 2px solid var(--neon-pink);
-    box-shadow: 0 0 8px var(--neon-pink);
-    background: rgba(255,255,255,0.05);
-    transition: transform 0.3s ease;
+    border: 2px solid var(--neon-purple); /* Borda Roxo Neon */
+    box-shadow: 0 0 8px var(--neon-purple), 0 0 15px var(--neon-purple); /* Sombra Roxo Neon */
+    background: var(--black);
 }
-
-.gallery img:hover {
-    transform: scale(1.08) rotate(2deg); /* Efeito de hover na galeria */
-}
-
 
 /* --- SEÇÃO: BENEFÍCIOS --- */
 .benefits-grid {
@@ -173,14 +194,9 @@ p {
 
 .benefit-item {
     background: rgba(255, 255, 255, 0.05);
-    padding: 25px;
+    padding: 20px;
     border-radius: 10px;
     border-left: 4px solid var(--neon-pink);
-    transition: background-color 0.3s ease;
-}
-
-.benefit-item:hover {
-    background-color: rgba(255, 0, 160, 0.1);
 }
 
 .benefit-item h3 {
@@ -213,21 +229,13 @@ p {
     padding: 30px 20px;
     text-align: center;
     font-size: 0.9rem;
-    color: rgba(255, 255, 255, 0.7);
 }
 
 .footer a {
     color: var(--neon-pink);
     text-decoration: none;
     margin: 0 10px;
-    transition: color 0.3s ease;
 }
-
-.footer a:hover {
-    text-decoration: underline;
-    color: var(--white);
-}
-
 
 /* --- RESPONSIVIDADE (MEDIA QUERIES) --- */
 @media (min-width: 768px) {
