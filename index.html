@@ -14,10 +14,12 @@
         /* --- RESET E CONFIGURAÇÕES GERAIS --- */
         :root {
             --neon-pink: #ff00a0;
-            --neon-purple: #9d00ff; /* Adicionada cor Roxo Neon */
+            --neon-purple: #9d00ff; /* Cor Roxo Neon para o carrossel */
             --black: #0d0d0d;
             --white: #ffffff;
             --glow-shadow-pink: 0 0 5px var(--neon-pink), 0 0 15px var(--neon-pink), 0 0 25px var(--neon-pink);
+            --gradient-start: #ff007f; /* Um rosa mais vibrante */
+            --gradient-end: #ffa0ff; /* Um rosa mais claro e suave */
         }
 
         * {
@@ -31,11 +33,12 @@
         }
 
         body {
-            background-color: var(--black);
+            background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%); /* Degradê rosa */
             font-family: 'Roboto', sans-serif;
             color: var(--white);
             line-height: 1.6;
             overflow-x: hidden;
+            min-height: 100vh; /* Garante que o degradê cubra a altura total */
         }
 
         /* --- CONTAINER E UTILITÁRIOS --- */
@@ -50,7 +53,8 @@
             font-family: 'Poppins', sans-serif;
             font-weight: 800;
             line-height: 1.2;
-            text-shadow: 0 0 3px var(--neon-pink);
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.7); /* Sombra branca para destacar no fundo rosa */
+            color: var(--black); /* Títulos em preto para contraste no degradê */
         }
 
         h1 {
@@ -61,20 +65,28 @@
         h2 {
             font-size: 2.2rem;
             margin-bottom: 2rem;
-            color: var(--neon-pink);
+            color: var(--black); /* Títulos secundários em preto */
         }
+        
+        h3 {
+            color: var(--neon-pink); /* Mantém os h3 dos benefícios em neon-pink */
+            text-shadow: 0 0 3px var(--neon-pink); /* Adiciona o glow neon aos h3 */
+        }
+
 
         p {
             font-size: 1.1rem;
             max-width: 700px;
             margin: 0 auto 1.5rem auto;
+            color: var(--black); /* Parágrafos em preto para contraste */
+            text-shadow: 0 0 1px rgba(255, 255, 255, 0.5); /* Pequena sombra para legibilidade */
         }
 
         /* --- BOTÃO DE AÇÃO (CTA) --- */
         .cta-button {
             display: inline-block;
-            background-color: var(--neon-pink);
-            color: var(--white);
+            background-color: var(--black); /* Botão em preto para se destacar no rosa */
+            color: var(--neon-pink); /* Texto do botão em rosa neon */
             font-family: 'Poppins', sans-serif;
             font-size: 1.2rem;
             font-weight: 700;
@@ -88,8 +100,8 @@
         }
 
         .cta-button:hover {
-            background-color: var(--black);
-            color: var(--neon-pink);
+            background-color: var(--neon-pink); /* Inverte as cores no hover */
+            color: var(--black);
             transform: scale(1.05);
             animation: none;
         }
@@ -123,7 +135,8 @@
 
         .support-elements span {
             font-weight: 700;
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(0, 0, 0, 0.3); /* Fundo mais escuro para destaque */
+            color: var(--white); /* Texto branco */
             padding: 8px 15px;
             border-radius: 10px;
             border-left: 3px solid var(--neon-pink);
@@ -131,12 +144,17 @@
 
         /* --- PROVA SOCIAL E GALERIA --- */
         .social-proof {
-            background: rgba(0,0,0,0.3);
-            border-top: 1px solid rgba(255, 0, 160, 0.2);
-            border-bottom: 1px solid rgba(255, 0, 160, 0.2);
+            background: rgba(0,0,0,0.3); /* Fundo escuro para destacar o carrossel no degradê */
+            border-top: 1px solid rgba(255, 255, 255, 0.2); /* Borda branca sutil */
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2); /* Borda branca sutil */
             padding-bottom: 60px; /* Mais espaço para o carrossel */
         }
         
+        .social-proof p {
+            color: var(--white); /* Parágrafo dentro do bloco escuro em branco */
+            text-shadow: none;
+        }
+
         .proof-items {
             display: flex;
             justify-content: center;
@@ -145,23 +163,23 @@
             font-weight: 700;
             margin-bottom: 3rem;
             flex-wrap: wrap;
+            color: var(--white); /* Itens da prova social em branco */
         }
         
         /* --- ESTILOS DO CARROSSEL --- */
         .carousel-container {
             width: 100%;
-            max-width: 90vw; /* Usa 90% da largura da tela */
+            max-width: 90vw;
             margin: 0 auto;
             overflow: hidden;
             position: relative;
-             /* Efeito de fade nas laterais para suavizar a entrada/saída */
-            -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-            mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+            /* Efeito de fade nas laterais usando o fundo da seção (preto) */
+            -webkit-mask-image: linear-gradient(to right, transparent, var(--black) 10%, var(--black) 90%, transparent);
+            mask-image: linear-gradient(to right, transparent, var(--black) 10%, var(--black) 90%, transparent);
         }
 
         .carousel-track {
             display: flex;
-            /* (Largura da imagem + gap) * (Nº de imagens * 2) */
             width: calc((160px + 20px) * 12); 
             animation: scroll 30s linear infinite;
         }
@@ -172,7 +190,7 @@
         }
 
         .carousel-track:hover {
-             animation-play-state: paused; /* Pausa a animação ao passar o mouse */
+             animation-play-state: paused;
         }
 
         .carousel-track img {
@@ -183,7 +201,7 @@
             border-radius: 10px;
             border: 2px solid var(--neon-purple); /* Borda Roxo Neon */
             box-shadow: 0 0 8px var(--neon-purple), 0 0 15px var(--neon-purple); /* Sombra Roxo Neon */
-            background: var(--black);
+            background: var(--black); /* Fundo preto para as imagens */
         }
         /* --- FIM DOS ESTILOS DO CARROSSEL --- */
 
@@ -198,57 +216,82 @@
         }
 
         .benefit-item {
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(0, 0, 0, 0.3); /* Fundo escuro para os itens de benefício */
+            color: var(--white); /* Texto branco */
             padding: 20px;
             border-radius: 10px;
             border-left: 4px solid var(--neon-pink);
+            text-shadow: none; /* Remove a sombra do texto padrão do body */
         }
 
         .benefit-item h3 {
             font-size: 1.5rem;
             margin-bottom: 0.5rem;
         }
+        
+        .benefit-item p {
+            color: var(--white); /* Parágrafos internos em branco */
+        }
 
         /* --- OFERTA E URGÊNCIA --- */
         .offer {
-            background: linear-gradient(0deg, rgba(255,0,160,0.1) 0%, rgba(13,13,13,1) 30%);
+            background: rgba(0,0,0,0.3); /* Fundo escuro para destaque */
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .offer h2, .offer p {
+            color: var(--white); /* Texto em branco */
+            text-shadow: none;
         }
 
         /* --- POLÍTICA DE REEMBOLSO --- */
         .policy {
-            background: rgba(255, 255, 255, 0.03);
+            background: rgba(0, 0, 0, 0.5); /* Fundo ainda mais escuro para a política */
+            color: var(--white); /* Texto em branco */
         }
 
         .policy p {
             font-size: 0.9rem;
             opacity: 0.8;
+            color: var(--white); /* Texto em branco */
+            text-shadow: none;
         }
         
         .policy h2 {
            font-size: 1.8rem;
+           color: var(--white); /* Título em branco */
+           text-shadow: 0 0 3px rgba(255, 255, 255, 0.7);
         }
 
         /* --- FOOTER --- */
         .footer {
-            border-top: 1px solid rgba(255, 0, 160, 0.2);
+            border-top: none; /* Removi a borda para ficar mais limpo com o degradê */
             padding: 30px 20px;
             text-align: center;
             font-size: 0.9rem;
+            color: var(--black); /* Texto do footer em preto */
+            text-shadow: 0 0 1px rgba(255, 255, 255, 0.5);
         }
 
-        .footer a {
-            color: var(--neon-pink);
-            text-decoration: none;
-            margin: 0 10px;
+        .footer p {
+            color: var(--black); /* Garante que o texto do parágrafo no footer seja preto */
         }
 
         /* --- RESPONSIVIDADE --- */
         @media (min-width: 768px) {
             h1 { font-size: 4rem; }
             h2 { font-size: 2.8rem; }
-            .benefits-grid { grid-template-columns: 1fr 1fr; }
+            .benefits-grid { grid-template-columns: 1fr 1fr 1fr; } /* 3 colunas para mais itens */
         }
 
+        @media (max-width: 480px) {
+            h1 { font-size: 2.2rem; }
+            h2 { font-size: 1.8rem; }
+            .container { padding: 40px 15px; }
+            .cta-button { font-size: 1rem; padding: 12px 30px; }
+            .proof-items { flex-direction: column; gap: 15px; }
+            .benefits-grid { grid-template-columns: 1fr; } /* Volta para 1 coluna em mobile */
+        }
     </style>
 </head>
 <body>
@@ -316,6 +359,14 @@
                         <h3>📲 Acesso Rápido e Fácil</h3>
                         <p>Receba o link do grupo no Telegram imediatamente após a compra e acesse de qualquer lugar, a qualquer hora.</p>
                     </div>
+                    <div class="benefit-item">
+                        <h3>💬 Acesso Vitalício via Telegram</h3>
+                        <p>Você receberá um link privado do Telegram com todas as figurinhas. Acesso instantâneo e para sempre!</p>
+                    </div>
+                    <div class="benefit-item">
+                        <h3>📧 Entrega via E-mail</h3>
+                        <p>Após o pagamento confirmado, um e-mail será enviado com os links de acesso ao grupo. Favor verificar a caixa de entrada ou a caixa de spam!</p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -341,11 +392,6 @@
 
     <footer class="footer">
         <p>© 2025 Figurinhas Criativas. Todos os direitos reservados.</p>
-        <p>
-            <a href="#">Contato</a> |
-            <a href="#">Política de Privacidade</a> |
-            <a href="#">Termos de Uso</a>
-        </p>
     </footer>
 
 </body>
