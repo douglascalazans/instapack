@@ -14,9 +14,10 @@
         /* --- RESET E CONFIGURAÇÕES GERAIS --- */
         :root {
             --neon-pink: #ff00a0;
+            --neon-purple: #9d00ff; /* Adicionada cor Roxo Neon */
             --black: #0d0d0d;
             --white: #ffffff;
-            --glow-shadow: 0 0 5px var(--neon-pink), 0 0 15px var(--neon-pink), 0 0 25px var(--neon-pink);
+            --glow-shadow-pink: 0 0 5px var(--neon-pink), 0 0 15px var(--neon-pink), 0 0 25px var(--neon-pink);
         }
 
         * {
@@ -81,7 +82,7 @@
             padding: 15px 40px;
             border-radius: 50px;
             border: 2px solid var(--neon-pink);
-            box-shadow: var(--glow-shadow);
+            box-shadow: var(--glow-shadow-pink);
             transition: all 0.3s ease;
             animation: pulse 2s infinite;
         }
@@ -133,6 +134,7 @@
             background: rgba(0,0,0,0.3);
             border-top: 1px solid rgba(255, 0, 160, 0.2);
             border-bottom: 1px solid rgba(255, 0, 160, 0.2);
+            padding-bottom: 60px; /* Mais espaço para o carrossel */
         }
         
         .proof-items {
@@ -144,21 +146,46 @@
             margin-bottom: 3rem;
             flex-wrap: wrap;
         }
-
-        .gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-            gap: 20px;
-        }
-
-        .gallery img {
+        
+        /* --- ESTILOS DO CARROSSEL --- */
+        .carousel-container {
             width: 100%;
-            height: auto;
-            border-radius: 10px;
-            border: 2px solid var(--neon-pink);
-            box-shadow: 0 0 8px var(--neon-pink);
-            background: rgba(255,255,255,0.05);
+            max-width: 90vw; /* Usa 90% da largura da tela */
+            margin: 0 auto;
+            overflow: hidden;
+            position: relative;
+             /* Efeito de fade nas laterais para suavizar a entrada/saída */
+            -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+            mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
         }
+
+        .carousel-track {
+            display: flex;
+            /* (Largura da imagem + gap) * (Nº de imagens * 2) */
+            width: calc((160px + 20px) * 12); 
+            animation: scroll 30s linear infinite;
+        }
+
+        @keyframes scroll {
+            from { transform: translateX(0); }
+            to { transform: translateX(calc((160px + 20px) * -6)); }
+        }
+
+        .carousel-track:hover {
+             animation-play-state: paused; /* Pausa a animação ao passar o mouse */
+        }
+
+        .carousel-track img {
+            width: 160px;
+            height: 160px;
+            object-fit: cover;
+            margin: 0 10px;
+            border-radius: 10px;
+            border: 2px solid var(--neon-purple); /* Borda Roxo Neon */
+            box-shadow: 0 0 8px var(--neon-purple), 0 0 15px var(--neon-purple); /* Sombra Roxo Neon */
+            background: var(--black);
+        }
+        /* --- FIM DOS ESTILOS DO CARROSSEL --- */
 
         /* --- SEÇÃO DE BENEFÍCIOS --- */
         .benefits-grid {
@@ -248,15 +275,25 @@
                     <span>📂 +5.000 Figurinhas Exclusivas</span>
                 </div>
                 <p>Veja algumas das figurinhas incríveis que você vai receber:</p>
-                <div class="gallery">
-                    <img src="https://via.placeholder.com/150/ff00a0/0d0d0d?text=Figurinha1" alt="Exemplo de figurinha 1">
-                    <img src="https://via.placeholder.com/150/ff00a0/0d0d0d?text=Figurinha2" alt="Exemplo de figurinha 2">
-                    <img src="https://via.placeholder.com/150/ff00a0/0d0d0d?text=Figurinha3" alt="Exemplo de figurinha 3">
-                    <img src="https://via.placeholder.com/150/ff00a0/0d0d0d?text=Figurinha4" alt="Exemplo de figurinha 4">
-                    <img src="https://via.placeholder.com/150/ff00a0/0d0d0d?text=Figurinha5" alt="Exemplo de figurinha 5">
-                    <img src="https://via.placeholder.com/150/ff00a0/0d0d0d?text=Figurinha6" alt="Exemplo de figurinha 6">
+
+                <div class="carousel-container">
+                    <div class="carousel-track">
+                        <img src="https://i.imgur.com/8BpUGAA.jpeg" alt="Exemplo de figurinha criativa">
+                        <img src="https://i.imgur.com/MxgScBQ.jpeg" alt="Exemplo de figurinha criativa">
+                        <img src="https://i.imgur.com/Z7rWuFW.jpeg" alt="Exemplo de figurinha criativa">
+                        <img src="https://i.imgur.com/u5QJd8b.jpeg" alt="Exemplo de figurinha criativa">
+                        <img src="https://i.imgur.com/DXWiVSW.jpeg" alt="Exemplo de figurinha criativa">
+                        <img src="https://i.imgur.com/Zoo8jQz.jpeg" alt="Exemplo de figurinha criativa">
+
+                        <img src="https://i.imgur.com/8BpUGAA.jpeg" alt="Exemplo de figurinha criativa">
+                        <img src="https://i.imgur.com/MxgScBQ.jpeg" alt="Exemplo de figurinha criativa">
+                        <img src="https://i.imgur.com/Z7rWuFW.jpeg" alt="Exemplo de figurinha criativa">
+                        <img src="https://i.imgur.com/u5QJd8b.jpeg" alt="Exemplo de figurinha criativa">
+                        <img src="https://i.imgur.com/DXWiVSW.jpeg" alt="Exemplo de figurinha criativa">
+                        <img src="https://i.imgur.com/Zoo8jQz.jpeg" alt="Exemplo de figurinha criativa">
+                    </div>
                 </div>
-            </div>
+                </div>
         </section>
 
         <section class="benefits">
