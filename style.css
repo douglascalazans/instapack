@@ -1,0 +1,488 @@
+/* --- Variáveis de Cor e Estilos Globais --- */
+:root {
+    --preto: #000000;
+    --branco: #FFFFFF;
+    --cinza-claro: #CCCCCC;
+    --roxo-neon: #A020F0;
+    --rosa-neon: #FF00FF;
+    --magenta-neon: #FF66CC;
+    --url-checkout: 'https://www.ggcheckout.com/checkout/v2/Z3VzGlDvIPiJP30xwlyb';
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--preto);
+    color: var(--branco);
+    overflow-x: hidden;
+}
+
+/* --- Estilos de Efeito Neon --- */
+.neon-glow-roxo {
+    filter: drop-shadow(0 0 5px var(--roxo-neon)) drop-shadow(0 0 10px var(--roxo-neon));
+}
+
+.neon-glow-rosa {
+    box-shadow: 0 0 5px var(--rosa-neon), 0 0 15px var(--rosa-neon), 0 0 25px var(--rosa-neon);
+}
+
+.neon-text-rosa {
+    text-shadow: 0 0 5px var(--rosa-neon), 0 0 10px var(--rosa-neon);
+}
+
+.neon-border-roxo {
+    border: 2px solid var(--roxo-neon);
+    box-shadow: 0 0 10px var(--roxo-neon);
+}
+
+/* --- Componentes Reutilizáveis --- */
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 60px 20px;
+}
+
+.btn-cta {
+    display: inline-block;
+    background-color: var(--rosa-neon);
+    color: var(--branco);
+    padding: 15px 30px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 700;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-cta:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 10px var(--rosa-neon), 0 0 25px var(--rosa-neon), 0 0 40px var(--rosa-neon);
+}
+
+.aviso-reembolso {
+    font-size: 12px;
+    color: var(--cinza-claro);
+    margin-top: 15px;
+    max-width: 600px;
+    text-align: center;
+    line-height: 1.5;
+}
+
+/* --- Cabeçalho --- */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 40px;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+    z-index: 1000;
+    border-bottom: 1px solid rgba(160, 32, 240, 0.3);
+}
+
+.header .logo img {
+    width: 200px;
+    transition: transform 0.3s ease;
+}
+.header .logo img:hover {
+    transform: scale(1.05);
+}
+
+/* --- Hero Section --- */
+.hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding-top: 100px; /* Espaço para o header fixo */
+    background: var(--preto) url('https://www.transparenttextures.com/patterns/curls.png') repeat;
+    position: relative;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(160, 32, 240, 0.2) 0%, rgba(0,0,0,0) 70%);
+    pointer-events: none;
+}
+
+.hero h1 {
+    font-size: 3.5rem;
+    max-width: 800px;
+    line-height: 1.2;
+    margin-bottom: 15px;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.hero p {
+    font-size: 1.2rem;
+    color: var(--cinza-claro);
+    margin-bottom: 30px;
+}
+
+.mockup-celular {
+    width: 100%;
+    max-width: 300px;
+    margin: 20px 0;
+}
+
+.preco-box {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    padding: 20px 40px;
+    margin: 30px 0;
+    border: 1px solid rgba(160, 32, 240, 0.4);
+}
+
+.preco-box .preco-antigo {
+    font-size: 1.5rem;
+    color: var(--cinza-claro);
+    text-decoration: line-through;
+}
+
+.preco-box .preco-novo {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin: 0 20px;
+    color: var(--branco);
+    position: relative;
+}
+
+.preco-box .selo-promo {
+    background-color: var(--rosa-neon);
+    color: var(--branco);
+    padding: 5px 15px;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    box-shadow: 0 0 10px var(--rosa-neon);
+}
+
+/* --- Benefícios --- */
+.beneficios {
+    text-align: center;
+}
+
+.beneficios-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    margin-top: 50px;
+}
+
+.beneficio-card {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 30px;
+    border-radius: 15px;
+    border: 1px solid rgba(160, 32, 240, 0.4);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.beneficio-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(160, 32, 240, 0.2);
+}
+
+.beneficio-card .icon {
+    font-size: 3rem;
+    margin-bottom: 15px;
+    color: var(--roxo-neon);
+    text-shadow: 0 0 10px var(--roxo-neon);
+}
+
+.beneficio-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.beneficio-card p {
+    color: var(--cinza-claro);
+}
+
+/* --- Amostras (Carrossel) --- */
+.amostras {
+    padding-bottom: 60px;
+}
+
+.carrossel-container {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    margin-top: 40px;
+    padding: 20px 0;
+}
+
+.carrossel-track {
+    display: flex;
+    width: calc(250px * 12); /* Largura da imagem * dobro do número de imagens */
+    animation: scroll 30s linear infinite;
+}
+
+.carrossel-slide {
+    width: 250px;
+    margin: 0 20px;
+    flex-shrink: 0;
+}
+
+.carrossel-slide img {
+    width: 100%;
+    border-radius: 20px;
+    border: 3px solid var(--roxo-neon);
+    box-shadow: 0 0 15px var(--roxo-neon);
+    transition: transform 0.3s ease;
+}
+
+.carrossel-slide img:hover {
+    transform: scale(1.05);
+}
+
+@keyframes scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(calc(-250px * 6)); } /* Largura da imagem * número de imagens */
+}
+
+.carrossel-container:hover .carrossel-track {
+    animation-play-state: paused;
+}
+
+/* --- Avisos Extras --- */
+.avisos-grid {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-top: 40px;
+}
+
+.aviso-card {
+    background: #111;
+    padding: 30px;
+    border-radius: 15px;
+    text-align: center;
+    max-width: 400px;
+    flex: 1;
+}
+
+.aviso-card .icon {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+}
+
+.aviso-card h3 {
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+    color: var(--branco);
+}
+
+.aviso-card p {
+    color: var(--cinza-claro);
+    line-height: 1.6;
+}
+
+/* --- Depoimentos --- */
+.depoimentos-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    margin-top: 50px;
+}
+
+.depoimento-card {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 25px;
+    border-radius: 15px;
+    border-left: 4px solid var(--rosa-neon);
+}
+
+.depoimento-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.depoimento-header img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 15px;
+    object-fit: cover;
+}
+
+.depoimento-header h4 {
+    font-size: 1.1rem;
+}
+
+.depoimento-card p {
+    color: var(--cinza-claro);
+    font-style: italic;
+}
+
+/* --- Oferta Final --- */
+.oferta {
+    text-align: center;
+    background: linear-gradient(45deg, var(--roxo-neon), var(--rosa-neon));
+}
+
+.oferta-box {
+    background: rgba(0, 0, 0, 0.6);
+    padding: 50px;
+    border-radius: 20px;
+}
+
+.oferta .preco-antigo {
+    font-size: 2rem;
+    text-decoration: line-through;
+    color: var(--cinza-claro);
+}
+
+.oferta .texto-oferta {
+    font-size: 1.8rem;
+    margin: 10px 0;
+}
+
+.oferta .preco-final {
+    font-size: 4rem;
+    font-weight: 700;
+    color: var(--branco);
+    margin-bottom: 20px;
+    text-shadow: 0 0 10px var(--branco);
+}
+
+.oferta ul {
+    list-style: none;
+    margin: 30px 0;
+    display: inline-block;
+    text-align: left;
+}
+
+.oferta ul li {
+    margin-bottom: 10px;
+    font-size: 1.1rem;
+}
+
+.oferta ul li .check {
+    color: var(--magenta-neon);
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+.btn-cta-gigante {
+    padding: 20px 50px;
+    font-size: 1.5rem;
+}
+
+/* --- FAQ --- */
+.faq {
+    max-width: 800px;
+}
+
+.faq h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+}
+
+.faq details {
+    background: #111;
+    border: 1px solid rgba(160, 32, 240, 0.4);
+    border-radius: 10px;
+    margin-bottom: 10px;
+    padding: 15px 20px;
+}
+
+.faq summary {
+    font-weight: 600;
+    cursor: pointer;
+    list-style: none; /* Remove a seta padrão */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.faq summary::-webkit-details-marker {
+    display: none; /* Chrome */
+}
+
+.faq summary::after {
+    content: '+';
+    font-size: 1.5rem;
+    color: var(--roxo-neon);
+    transition: transform 0.2s;
+}
+
+.faq details[open] summary::after {
+    transform: rotate(45deg);
+}
+
+.faq details div {
+    padding-top: 15px;
+    color: var(--cinza-claro);
+    line-height: 1.6;
+}
+
+/* --- Rodapé --- */
+.footer {
+    text-align: center;
+    padding: 30px 20px;
+    border-top: 1px solid rgba(160, 32, 240, 0.3);
+    font-size: 0.9rem;
+    color: var(--cinza-claro);
+}
+
+/* --- Responsividade --- */
+@media (max-width: 900px) {
+    .beneficios-grid, .depoimentos-grid {
+        grid-template-columns: 1fr;
+    }
+    .avisos-grid {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 768px) {
+    .header {
+        padding: 15px 20px;
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .hero {
+        padding-top: 150px;
+    }
+    
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+    
+    .hero p {
+        font-size: 1rem;
+    }
+    
+    .preco-box {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+}
